@@ -14,11 +14,6 @@ public class MainController {
     @RequestMapping("/")
     public String index() {
 
-        String email = "dlrkdhsoff@gmail.com";
-        String subject = "안녕하세요";
-        String text = "<p>안녕하세요.</p><p>반갑습니다</p>";
-
-        mailComponents.sendMail(email, subject, text);
         return "index";
     }
 }
