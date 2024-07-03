@@ -43,9 +43,25 @@ public class MemberServiceImpl implements MemberService {
         String subject = "fastlms 사이트 가입을 축하드립니다.";
         String text = "<p>fastlms 사이트 가입을 축하드립니다.</p>" +
                 "<p>아래 링크를 클릭하셔서 가입을 완료 하세요.</p>" +
-                "<div><a href='http://localhost:8080/member/email-auth?id=" + uuid + "'>가입 완료</a></div>";
+                "<div><a target='_blank' href='http://localhost:8080/member/email-auth?id=" + uuid + "'>가입 완료</a></div>";
 
         mailComponents.sendMail(email, subject, text);
+        return true;
+    }
+
+    @Override
+    public boolean emailAuth(String uuid) {
+
+        Optional<Member> optionalMember = memberRepository.findByEmailAuthKey(uuid);
+
+        if (optionalMember.isEmpty()) {
+            return false;
+        }
+        Member member = optionalMember.get();
+        member.setEmailAuthYn(true);
+        member.setEmailAuthDt(LocalDateTime.now());
+
+        memberRepository.save(member);
         return true;
     }
 }

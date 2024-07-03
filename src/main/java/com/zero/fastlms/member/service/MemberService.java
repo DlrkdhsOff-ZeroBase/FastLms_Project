@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
 
     boolean register(MemberInput parameter);
+
+    boolean emailAuth(String uuid);
 }
