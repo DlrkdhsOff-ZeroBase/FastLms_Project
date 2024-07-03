@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean register(MemberInput parameter) {
+
+        Optional<Member> optionalMember = memberRepository.findById(parameter.getUserId());
+
+        if(optionalMember.isPresent()) {
+            return false;
+        }
                 memberRepository.save(Member.builder()
                 .userId(parameter.getUserId())
                 .userName(parameter.getUserName())
@@ -24,6 +31,6 @@ public class MemberServiceImpl implements MemberService {
                 .regDt(LocalDateTime.now())
                 .build());
 
-        return false;
+        return true;
     }
 }

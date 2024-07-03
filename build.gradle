@@ -25,14 +25,21 @@ repositories {
 }
 
 dependencies {
+    // thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Spring Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Java Mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Mysql
     runtimeOnly 'com.mysql:mysql-connector-j'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
