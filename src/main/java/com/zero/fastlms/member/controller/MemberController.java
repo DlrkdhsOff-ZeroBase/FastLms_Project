@@ -38,7 +38,7 @@ public class MemberController {
     @GetMapping("/email-auth")
     public String emailAuth(@RequestParam String id, Model model) {
 
-       boolean result = memberService.emailAuth(id);
+        boolean result = memberService.emailAuth(id);
         model.addAttribute("result", result);
 
         return "member/email_auth";
@@ -49,9 +49,19 @@ public class MemberController {
         return "/member/info";
     }
 
+    //    @RequestMapping("/login")
+//    public String login(HttpServletRequest request, Model model) {
+//        if (request.getParameter("errorMessage") != null) {
+//            System.out.println(request.getParameter("errorMessage") );
+//            model.addAttribute("errorMessage", request.getParameter("errorMessage") );
+//        }
+//
+//        return "/member/login";
+//    }
     @RequestMapping("/login")
     public String login() {
 
-        return "member/login";
+        return "/member/login";
     }
+
 }
