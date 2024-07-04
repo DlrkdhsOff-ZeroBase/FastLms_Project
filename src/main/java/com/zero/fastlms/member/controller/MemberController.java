@@ -1,6 +1,7 @@
 package com.zero.fastlms.member.controller;
 
 import com.zero.fastlms.member.model.MemberInput;
+import com.zero.fastlms.member.model.ResetPasswordInput;
 import com.zero.fastlms.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,19 +50,54 @@ public class MemberController {
         return "/member/info";
     }
 
-    //    @RequestMapping("/login")
-//    public String login(HttpServletRequest request, Model model) {
-//        if (request.getParameter("errorMessage") != null) {
-//            System.out.println(request.getParameter("errorMessage") );
-//            model.addAttribute("errorMessage", request.getParameter("errorMessage") );
-//        }
-//
-//        return "/member/login";
-//    }
+
     @RequestMapping("/login")
     public String login() {
 
-        return "/member/login";
+        return "member/login";
     }
 
+    @GetMapping("/find/password")
+    public String findPassword() {
+        return "member/find_password";
+    }
+
+    @PostMapping("/find/password")
+    public String findPasswordSubmit(Model model, ResetPasswordInput parameter) {
+        boolean result = false;
+
+        try {
+            result = memberService.sendResetPassword(parameter);
+        } catch (Exception e) {
+
+        }
+        model.addAttribute("result", result);
+
+        return "member/find_password_result";
+    }
+
+    @GetMapping("/reset/password")
+    public String resetPassword(Model model, HttpServletRequest request) {
+
+        String uuid = request.getParameter("id");
+
+        boolean result = memberService.checkResetPassword(uuid);
+        model.addAttribute("result", result);
+
+        return "member/reset_password";
+    }
+
+    @PostMapping("/reset/password")
+    public String resetPasswordSubmit(Model model, ResetPasswordInput parameter) {
+
+        boolean result = false;
+        try {
+            result = memberService.resetPassword(parameter.getId(), parameter.getPassword());
+        } catch (Exception e) {
+        }
+
+        model.addAttribute("result", result);
+
+        return "member/reset_password_result";
+    }
 }

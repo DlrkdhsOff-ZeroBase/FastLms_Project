@@ -28,20 +28,24 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/member/register", "/member/email-auth").permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers("/"
+                                , "/member/register"
+                                , "/member/email-auth"
+                                , "/member/find/password"
+                                , "/member/reset/password")
+                        .permitAll()
+                        .anyRequest().authenticated())
+
                 .formLogin(formLogin -> formLogin
                         .loginPage("/member/login")
                         .defaultSuccessUrl("/", true)
                         .failureHandler(getFailureHandler())
-                        .permitAll()
-                )
+                        .permitAll())
+
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                );
+                        .invalidateHttpSession(true));
 
         return http.build();
     }
