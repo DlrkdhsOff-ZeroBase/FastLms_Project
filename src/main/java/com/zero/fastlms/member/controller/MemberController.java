@@ -43,4 +43,15 @@ public class MemberController {
 
         return "member/email_auth";
     }
+
+    @GetMapping("/info")
+    public String memberInfo() {
+        return "/member/info";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+
+        return "member/login";
+    }
 }
