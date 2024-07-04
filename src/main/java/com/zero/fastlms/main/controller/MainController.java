@@ -1,4 +1,4 @@
-package com.zero.fastlms;
+package com.zero.fastlms.main.controller;
 
 import com.zero.fastlms.components.MailComponents;
 import lombok.RequiredArgsConstructor;
