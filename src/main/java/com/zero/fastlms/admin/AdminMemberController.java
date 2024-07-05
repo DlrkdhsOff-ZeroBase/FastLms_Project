@@ -1,6 +1,7 @@
 package com.zero.fastlms.admin;
 
 import com.zero.fastlms.admin.dto.MemberDto;
+import com.zero.fastlms.admin.model.MemberParam;
 import com.zero.fastlms.member.entity.Member;
 import com.zero.fastlms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ public class AdminMemberController {
     private final MemberService memberService;
 
     @GetMapping("/admin/member/list.do")
-    public String memberList(Model model) {
+    public String memberList(Model model, MemberParam parameter) {
 
-        List<MemberDto> list = memberService.getList();
+        List<MemberDto> list = memberService.getList(parameter);
         model.addAttribute("list", list);
 
         return "admin/member/list";
