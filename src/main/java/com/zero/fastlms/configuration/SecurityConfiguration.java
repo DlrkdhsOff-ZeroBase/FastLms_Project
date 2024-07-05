@@ -10,7 +10,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,26 +25,32 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.disable())
+
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/"
-                                , "/member/register"
-                                , "/member/email-auth"
-                                , "/member/find/password"
-                                , "/member/reset/password")
+                        .requestMatchers("/",
+                                "/member/register",
+                                "/member/email-auth",
+                                "/member/find/password",
+                                "/member/reset/password")
                         .permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .anyRequest().authenticated()
+                )
 
                 .formLogin(formLogin -> formLogin
                         .loginPage("/member/login")
                         .defaultSuccessUrl("/", true)
-                        .failureHandler(getFailureHandler())
                         .permitAll())
 
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true));
+                        .invalidateHttpSession(true))
+
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling.accessDeniedPage("/error/denied")
+                );
 
         return http.build();
     }
