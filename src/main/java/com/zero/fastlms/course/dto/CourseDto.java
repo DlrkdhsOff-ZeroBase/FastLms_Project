@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CourseDto {
     Long id;
+    long categoryId;
     String imagePath;
     String keyword;
     String subject;
@@ -21,7 +23,7 @@ public class CourseDto {
     String contents;
     long price;
     long salePrice;
-    LocalDateTime saleEndDt;
+    LocalDate saleEndDt;
     LocalDateTime regDt;
     LocalDateTime uptDt;
 
@@ -31,6 +33,7 @@ public class CourseDto {
     public static CourseDto of(Course course) {
         return CourseDto.builder()
                 .id(course.getId())
+                .categoryId(course.getCategoryId())
                 .imagePath(course.getImagePath())
                 .keyword(course.getKeyword())
                 .subject(course.getSubject())

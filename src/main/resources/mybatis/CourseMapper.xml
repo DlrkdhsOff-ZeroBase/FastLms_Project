@@ -13,6 +13,7 @@
     <select id="selectList" resultType="com.zero.fastlms.course.dto.CourseDto">
         select * from course
         <include refid="selectListWhere"/>
+        order by reg_dt desc
         limit #{pageStart}, #{pageEnd}
     </select>
 
