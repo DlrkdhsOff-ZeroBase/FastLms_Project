@@ -5,6 +5,7 @@ import com.zero.fastlms.member.model.ResetPasswordInput;
 import com.zero.fastlms.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +53,13 @@ public class MemberController {
 
 
     @RequestMapping("/login")
-    public String login() {
-
+    public String login(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        String errorMessage = (String) session.getAttribute("errorMessage");
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+            System.out.println("errorMessage = " + errorMessage);
+        }
         return "member/login";
     }
 
