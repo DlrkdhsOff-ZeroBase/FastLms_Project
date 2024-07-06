@@ -1,10 +1,17 @@
 package com.zero.fastlms.admin.dto;
 
+import com.zero.fastlms.member.entity.Member;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberDto {
 
     private String userId;
@@ -25,4 +32,20 @@ public class MemberDto {
 
     long totalCount;
     long seq;
+
+    public static MemberDto of(Member member) {
+        return MemberDto.builder()
+                .userId(member.getUserId())
+                .userName(member.getUserName())
+                .password(member.getPassword())
+                .phone(member.getPhone())
+                .regDt(member.getRegDt())
+                .emailAuthYn(member.isEmailAuthYn())
+                .emailAuthDt(member.getEmailAuthDt())
+                .emailAuthKey(member.getEmailAuthKey())
+                .resetPasswordKey(member.getResetPasswordKey())
+                .resetPasswordLimitDt(member.getResetPasswordLimitDt())
+                .admin_Yn(member.isAdmin_Yn())
+                .build();
+    }
 }
