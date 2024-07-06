@@ -11,12 +11,13 @@
         .list table th, .list table td {
             border: solid 1px #000;
         }
-        p.nothing {
+        .pager {
+            margin-top: 20px;
             text-align: center;
-            padding: 100px;
         }
-        .inline-div {
-            display: inline-block;
+        .pager a.on {
+            font-weight: bold;
+            color: red;
         }
 
     </style>
@@ -56,7 +57,9 @@
                     <tr th:each="course : ${list}">
                         <td th:text="${course.seq}"></td>
                         <td>
-                            <p th:text="${course.subject}">Y</p>
+                            <p>
+                                <a th:href="'edit.do?id=' + ${course.id}" th:text="${course.subject}"></a>
+                            </p>
                         </td>
                         <td>
                             <p th:text="${course.regDt}"></p>
@@ -67,6 +70,7 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="pager" th:utext="${pager}">
         </div>
     </body>
 </html>
