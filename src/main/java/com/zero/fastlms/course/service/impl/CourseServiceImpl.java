@@ -1,6 +1,5 @@
 package com.zero.fastlms.course.service.impl;
 
-import com.zero.fastlms.admin.dto.MemberDto;
 import com.zero.fastlms.course.dto.CourseDto;
 import com.zero.fastlms.course.entity.Course;
 import com.zero.fastlms.course.mapper.CourseMapper;

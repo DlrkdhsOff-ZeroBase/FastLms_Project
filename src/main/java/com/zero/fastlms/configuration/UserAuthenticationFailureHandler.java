@@ -1,6 +1,5 @@
 package com.zero.fastlms.configuration;
 
-import com.zero.fastlms.member.exception.MemberStopUserException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,7 +8,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import java.io.IOException;
-import java.lang.reflect.Member;
 
 public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 

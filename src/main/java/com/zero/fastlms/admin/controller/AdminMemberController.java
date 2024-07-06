@@ -5,7 +5,6 @@ import com.zero.fastlms.admin.model.MemberInput;
 import com.zero.fastlms.admin.model.MemberParam;
 import com.zero.fastlms.course.controller.BaseController;
 import com.zero.fastlms.member.service.MemberService;
-import com.zero.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

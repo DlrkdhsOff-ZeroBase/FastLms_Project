@@ -2,9 +2,7 @@ package com.zero.fastlms.admin.controller;
 
 import com.zero.fastlms.admin.dto.CategoryDto;
 import com.zero.fastlms.admin.model.CategoryInput;
-import com.zero.fastlms.admin.model.MemberParam;
 import com.zero.fastlms.admin.service.CategoryService;
-import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

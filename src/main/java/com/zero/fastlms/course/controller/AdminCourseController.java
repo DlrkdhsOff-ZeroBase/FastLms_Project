@@ -1,11 +1,9 @@
 package com.zero.fastlms.course.controller;
 
-import com.zero.fastlms.admin.dto.MemberDto;
 import com.zero.fastlms.course.dto.CourseDto;
 import com.zero.fastlms.course.model.CourseInput;
 import com.zero.fastlms.course.model.CourseParam;
 import com.zero.fastlms.course.service.CourseService;
-import com.zero.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
