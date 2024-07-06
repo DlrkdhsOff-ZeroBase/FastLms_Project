@@ -9,5 +9,10 @@ import java.util.List;
 public interface CourseService {
     boolean add(CourseInput parameter);
 
+    boolean set(CourseInput parameter);
+
     List<CourseDto> getList(CourseParam parameter);
+
+    CourseDto getById(long id);
+
 }
