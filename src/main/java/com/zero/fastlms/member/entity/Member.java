@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member implements MemberCode{
 
     @Id
     private String userId;
@@ -31,6 +31,8 @@ public class Member {
     private String resetPasswordKey;
     private LocalDateTime resetPasswordLimitDt;
 
-    private boolean admin_Yn;
+    private boolean adminYn;
+
+    private String userStatus;
 
 }
