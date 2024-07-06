@@ -3,6 +3,7 @@ package com.zero.fastlms.admin.controller;
 import com.zero.fastlms.admin.dto.MemberDto;
 import com.zero.fastlms.admin.model.MemberInput;
 import com.zero.fastlms.admin.model.MemberParam;
+import com.zero.fastlms.course.controller.BaseController;
 import com.zero.fastlms.member.service.MemberService;
 import com.zero.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/member")
-public class AdminMemberController {
+public class AdminMemberController extends BaseController {
 
     private final MemberService memberService;
 
@@ -33,11 +34,11 @@ public class AdminMemberController {
         }
 
         String queryString = parameter.getQueryString();
-        PageUtil pageUtil = new PageUtil(totalCount, parameter.getPageSize(), parameter.getPageIndex(), queryString);
+        String pagerHtml = getPagerHtml(totalCount, parameter.getPageSize(), parameter.getPageIndex(), queryString);
 
         model.addAttribute("list", members);
         model.addAttribute("totalCount", totalCount);
-        model.addAttribute("pager", pageUtil.pager());
+        model.addAttribute("pager", pagerHtml);
 
         return "admin/member/list";
     }

@@ -3,22 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zero.fastlms.admin.mapper.MemberMapper">
+<mapper namespace="com.zero.fastlms.course.mapper.CourseMapper">
 
-    <select id="selectListCount"
-            parameterType="com.zero.fastlms.admin.model.MemberParam"
-            resultType="long">
-        select count(*) from member
+    <select id="selectListCount" resultType="long">
+        select count(*) from course
         <include refid="selectListWhere"/>
     </select>
 
-    <select id="selectList"
-            parameterType="com.zero.fastlms.admin.model.MemberParam"
-            resultType="com.zero.fastlms.admin.dto.MemberDto">
-        select * from member
+    <select id="selectList" resultType="com.zero.fastlms.course.dto.CourseDto">
+        select * from course
         <include refid="selectListWhere"/>
         limit #{pageStart}, #{pageEnd}
     </select>
+
+
 
     <sql id="selectListWhere">
         <if test="searchType != null and searchValue != null">
@@ -35,8 +33,10 @@
                 <otherwise>
                     where (
                     user_id like concat('%', #{searchValue}, '%')
-                    or user_name like concat('%', #{searchValue}, '%')
-                    or phone like concat('%', #{searchValue}, '%')
+                    or
+                    user_name like concat('%', #{searchValue}, '%')
+                    or
+                    phone like concat('%', #{searchValue}, '%')
                     )
                 </otherwise>
             </choose>
