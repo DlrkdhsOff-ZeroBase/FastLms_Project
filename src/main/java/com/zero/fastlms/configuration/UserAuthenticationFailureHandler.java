@@ -1,5 +1,6 @@
 package com.zero.fastlms.configuration;
 
+import com.zero.fastlms.member.exception.MemberStopUserException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import java.io.IOException;
+import java.lang.reflect.Member;
 
 public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
@@ -18,13 +20,13 @@ public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
 
         if (exception instanceof InternalAuthenticationServiceException) {
             message = exception.getMessage();
+            System.out.println("message ->  " + message);
         }
 
 
-        setUseForward(false);  // 포워드 대신 리다이렉트를 사용
+        setUseForward(false);
         setDefaultFailureUrl("/member/login");
 
-        // 세션에 에러 메시지 설정
         request.getSession().setAttribute("errorMessage", message);
 
         System.out.println("로그인 실패");
