@@ -76,7 +76,10 @@
                 <tbody>
                     <tr th:each="members : ${list}">
                         <td th:text="${members.seq}"></td>
-                        <td th:text="${members.userId}"></td>
+                        <td>
+                            <a th:text="${members.userId}"
+                               th:href="'/admin/member/detail.do?userId=' + ${members.userId}"></a>
+                        </td>
                         <td th:text="${members.userName}"></td>
                         <td th:text="${members.phone}"></td>
                         <td>
