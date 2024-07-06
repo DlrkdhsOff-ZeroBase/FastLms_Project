@@ -37,7 +37,7 @@ public class MemberDto {
         return MemberDto.builder()
                 .userId(member.getUserId())
                 .userName(member.getUserName())
-                .password(member.getPassword())  // Ensure this mapping
+                .password(member.getPassword())
                 .phone(member.getPhone())
                 .regDt(member.getRegDt())
                 .emailAuthYn(member.isEmailAuthYn())

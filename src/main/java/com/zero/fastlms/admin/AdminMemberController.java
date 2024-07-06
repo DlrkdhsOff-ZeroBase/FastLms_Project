@@ -42,7 +42,8 @@ public class AdminMemberController {
     public String detail(Model model, MemberParam parameter) {
         parameter.init();
 
-        List<MemberDto> members = memberService.getList(parameter);
+       MemberDto member =  memberService.detail(parameter.getUserId());
+        model.addAttribute("member", member);
 
         return "admin/member/detail";
     }
