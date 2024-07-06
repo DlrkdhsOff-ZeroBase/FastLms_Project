@@ -25,4 +25,6 @@ public interface MemberService extends UserDetailsService {
     MemberDto detail(String userId);
 
     boolean updateStatus(String userId, String userStatus);
+
+    boolean updatePassword(String userId, String password);
 }

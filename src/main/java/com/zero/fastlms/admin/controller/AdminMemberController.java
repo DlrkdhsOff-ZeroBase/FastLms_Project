@@ -1,8 +1,8 @@
 package com.zero.fastlms.admin.controller;
 
 import com.zero.fastlms.admin.dto.MemberDto;
+import com.zero.fastlms.admin.model.MemberInput;
 import com.zero.fastlms.admin.model.MemberParam;
-import com.zero.fastlms.admin.model.MemberStatusInput;
 import com.zero.fastlms.member.service.MemberService;
 import com.zero.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
@@ -53,10 +53,20 @@ public class AdminMemberController {
     }
 
     @PostMapping("/status.do")
-    public String status(Model mode, MemberStatusInput parameter) {
-       boolean result =  memberService.updateStatus(parameter.getUserId(), parameter.getUserStatus());
+    public String status(Model mode, MemberInput parameter) {
+
+        boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getUserStatus());
 
         return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
     }
+
+    @PostMapping("/password.do")
+    public String password(Model mode, MemberInput parameter) {
+
+        boolean result = memberService.updatePassword(parameter.getUserId(), parameter.getPassword());
+
+        return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
+    }
+
 
 }
