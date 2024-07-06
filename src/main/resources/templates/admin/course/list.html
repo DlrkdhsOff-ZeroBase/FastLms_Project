@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 화면</title>
+    <style>
+        .list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .list table th, .list table td {
+            border: solid 1px #000;
+        }
+        p.nothing {
+            text-align: center;
+            padding: 100px;
+        }
+        .inline-div {
+            display: inline-block;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous">
+
+    </script>
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+</head>
+    <body>
+        <h1>강좌 관리</h1>
+        <div th:replace="~{/fragments/admin_layout.html :: fragment-admin-body-menu}"></div>
+
+        <div>
+            <a href="/admin/course/add.do">강좌 등록</a>
+        </div>
+
+        <div class="list">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>강좌명</th>
+                    <th>등록일</th>
+<!--                    <th>사용 여부</th>-->
+<!--                    <th>비고</th>-->
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="course : ${list}">
+                        <td th:text="${course.seq}"></td>
+                        <td>
+                            <p th:text="${course.subject}">Y</p>
+                        </td>
+                        <td>
+                            <p th:text="${course.regDt}"></p>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
