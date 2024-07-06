@@ -1,6 +1,7 @@
 package com.zero.fastlms.admin.service;
 
 import com.zero.fastlms.admin.dto.CategoryDto;
+import com.zero.fastlms.admin.model.CategoryInput;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface CategoryService {
 
     boolean add(String categoryName);
 
-    boolean update(CategoryDto parameter);
+    boolean update(CategoryInput parameter);
 
     boolean delete(Long id);
 }
