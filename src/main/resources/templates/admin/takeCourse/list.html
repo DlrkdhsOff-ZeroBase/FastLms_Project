@@ -93,7 +93,7 @@
                 <tbody th:id="dataList">
                     <tr th:each="takecourse : ${takeCourseList}">
                         <td th:text="${takecourse.seq}"></td>
-                        <td><p th:text="${takecourse.regDt}"></p></td>
+                        <td><p th:text="${takecourse.regDtText}"></p></td>
                         <td>
                             <p th:text="${takecourse.subject}"></p>
                         </td>
