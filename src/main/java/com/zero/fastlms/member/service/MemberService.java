@@ -29,5 +29,7 @@ public interface MemberService extends UserDetailsService {
 
     boolean updatePassword(String userId, String password);
 
+    ServiceResult updateMember(MemberInput parameter);
+
     ServiceResult updateMemberPassword(MemberInput parameter);
 }

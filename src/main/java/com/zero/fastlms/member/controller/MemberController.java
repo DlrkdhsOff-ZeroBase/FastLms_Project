@@ -135,6 +135,19 @@ public class MemberController {
         return "redirect:/member/info";
     }
 
+    @PostMapping("/info")
+    public String updateMember(Principal principal, Model model, MemberInput parameter) {
+        parameter.setUserId(principal.getName());
+
+        ServiceResult result = memberService.updateMember(parameter);
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/info";
+    }
+
 
     @GetMapping("/myTakeCourse")
     public String myTakeCourse() {
