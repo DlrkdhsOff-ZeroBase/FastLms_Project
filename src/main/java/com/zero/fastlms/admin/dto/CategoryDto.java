@@ -21,6 +21,8 @@ public class CategoryDto {
 
     boolean usingYn;
 
+    int courseCount;
+
     public static List<CategoryDto> of(List<Category> categories) {
         if (!categories.isEmpty()) {
             List<CategoryDto> categoryList = new ArrayList<>();

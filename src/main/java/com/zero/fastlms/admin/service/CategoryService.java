@@ -14,4 +14,6 @@ public interface CategoryService {
     boolean update(CategoryInput parameter);
 
     boolean delete(Long id);
+
+    List<CategoryDto> frontList(CategoryDto parameter);
 }

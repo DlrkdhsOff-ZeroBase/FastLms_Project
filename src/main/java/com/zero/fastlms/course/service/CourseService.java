@@ -16,4 +16,7 @@ public interface CourseService {
     CourseDto getById(long id);
 
     boolean delete(String idList);
+
+
+    List<CourseDto> frontList(CourseParam parameter);
 }
