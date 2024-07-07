@@ -1,5 +1,7 @@
 package com.zero.fastlms.member.controller;
 
+import com.zero.fastlms.admin.dto.MemberDto;
+import com.zero.fastlms.course.model.ServiceResult;
 import com.zero.fastlms.member.model.MemberInput;
 import com.zero.fastlms.member.model.ResetPasswordInput;
 import com.zero.fastlms.member.service.MemberService;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/member")
@@ -47,7 +51,12 @@ public class MemberController {
     }
 
     @GetMapping("/info")
-    public String memberInfo() {
+    public String memberInfo(Principal principal, Model model) {
+        String userId = principal.getName();
+
+        MemberDto detail = memberService.detail(userId);
+        model.addAttribute("detail", detail);
+
         return "/member/info";
     }
 
@@ -105,5 +114,30 @@ public class MemberController {
         model.addAttribute("result", result);
 
         return "member/reset_password_result";
+    }
+
+    @GetMapping("/updatePassword")
+    public String updatePassword() {
+        return "member/updatePassword";
+    }
+
+    @PostMapping("/updatePassword")
+    public String updatePassword(Model model, MemberInput parameter, Principal principal) {
+        System.out.println("MemberController.updatePassword");
+
+        parameter.setUserId(principal.getName());
+        ServiceResult result = memberService.updateMemberPassword(parameter);
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/info";
+    }
+
+
+    @GetMapping("/myTakeCourse")
+    public String myTakeCourse() {
+        return "member/myTakeCourse";
     }
 }
