@@ -1,5 +1,6 @@
 package com.zero.fastlms.course.controller;
 
+import com.zero.fastlms.course.model.ServiceResult;
 import com.zero.fastlms.course.model.TakeCourseInput;
 import com.zero.fastlms.course.service.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ public class ApiCourseController {
                                        Principal principal) {
         parameter.setUserId(principal.getName());
 
-        boolean result = courseService.req(parameter);
-        if (!result) {
-            return ResponseEntity.badRequest().body("수강신청에 실패하였습니다.");
+        ServiceResult result = courseService.req(parameter);
+        if (!result.isResult()) {
+            return ResponseEntity.ok().body(result.getMessage());
         }
 
         return ResponseEntity.ok().body(parameter);

@@ -29,7 +29,12 @@
                 };
 
                 axios.post(url, parameter).then(function (response) {
-                    console.log(response);
+
+                    const msg = response.data || '';
+                    if (msg != null) {
+                        alert(msg);
+                    }
+
                 }).catch(function (err) {
                     console.log(err);
                 })
