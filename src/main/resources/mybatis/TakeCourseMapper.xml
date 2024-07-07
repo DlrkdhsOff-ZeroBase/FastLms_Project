@@ -17,36 +17,17 @@
         from take_course tc
             join course c on tc.course_id = c.id
             join member m on tc.user_id = m.user_id
-        where 1 = 1
         order by reg_dt desc
         limit #{pageStart}, #{pageEnd}
     </select>
 
-
-
-    <sql id="selectListWhere">
-        <if test="searchType != null and searchValue != null">
-            <choose>
-                <when test="searchType == 'userId'">
-                    where user_id like concat('%', #{searchValue}, '%')
-                </when>
-                <when test="searchType == 'userName'">
-                    where user_name like concat('%', #{searchValue}, '%')
-                </when>
-                <when test="searchType == 'phone'">
-                    where phone like concat('%', #{searchValue}, '%')
-                </when>
-                <otherwise>
-                    where (
-                    user_id like concat('%', #{searchValue}, '%')
-                    or
-                    user_name like concat('%', #{searchValue}, '%')
-                    or
-                    phone like concat('%', #{searchValue}, '%')
-                    )
-                </otherwise>
-            </choose>
-        </if>
-    </sql>
+    <select id="selectListMyCourse" resultType="com.zero.fastlms.course.dto.TakeCourseDto">
+        select tc.*
+             , c.subject
+        from take_course tc
+                 join course c on tc.course_id = c.id
+        where tc.user_id = #{userId}
+        order by reg_dt desc
+    </select>
 
 </mapper>
