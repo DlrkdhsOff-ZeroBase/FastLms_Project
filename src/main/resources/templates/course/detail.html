@@ -29,11 +29,17 @@
                 };
 
                 axios.post(url, parameter).then(function (response) {
+                    console.log(response)
 
-                    const msg = response.data || '';
-                    if (msg != null) {
-                        alert(msg);
+                    response.data = response.data || {};
+                    response.data.header = response.data.header || {};
+                    if (!response.data.header.result) {
+                        alert(response.data.header.message);
+                        return false;
                     }
+
+                    alert('강좌가 정상적으로 신청 되었습니다.');
+                    location.href = '/';
 
                 }).catch(function (err) {
                     console.log(err);
