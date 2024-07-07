@@ -235,6 +235,9 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = optionalMember.get();
         member.setPhone(parameter.getPhone());
+        member.setZipcode(parameter.getZipcode());
+        member.setAddress(parameter.getAddress());
+        member.setAddressDetail(parameter.getAddressDetail());
         member.setUdtDt(LocalDateTime.now());
         memberRepository.save(member);
 

@@ -36,4 +36,8 @@ public class Member implements MemberCode{
 
     private String userStatus;
 
+    private String zipcode;
+    private String address;
+    private String addressDetail;
+
 }
