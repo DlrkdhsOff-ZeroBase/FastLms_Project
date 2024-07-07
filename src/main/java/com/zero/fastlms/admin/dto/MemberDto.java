@@ -31,8 +31,11 @@ public class MemberDto {
     private LocalDateTime resetPasswordLimitDt;
 
     private boolean admin_Yn;
-
     private String userStatus;
+
+    private String zipcode;
+    private String address;
+    private String addressDetail;
 
     long totalCount;
     long seq;
@@ -52,6 +55,9 @@ public class MemberDto {
                 .resetPasswordLimitDt(member.getResetPasswordLimitDt())
                 .admin_Yn(member.isAdminYn())
                 .userStatus(member.getUserStatus())
+                .zipcode(member.getZipcode())
+                .address(member.getAddress())
+                .addressDetail(member.getAddressDetail())
                 .build();
     }
 
