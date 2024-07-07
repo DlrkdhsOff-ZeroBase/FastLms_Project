@@ -2,6 +2,7 @@ package com.zero.fastlms.member.service;
 
 import com.zero.fastlms.admin.dto.MemberDto;
 import com.zero.fastlms.admin.model.MemberParam;
+import com.zero.fastlms.course.model.ServiceResult;
 import com.zero.fastlms.member.model.MemberInput;
 import com.zero.fastlms.member.model.ResetPasswordInput;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,4 +28,6 @@ public interface MemberService extends UserDetailsService {
     boolean updateStatus(String userId, String userStatus);
 
     boolean updatePassword(String userId, String password);
+
+    ServiceResult updateMemberPassword(MemberInput parameter);
 }
