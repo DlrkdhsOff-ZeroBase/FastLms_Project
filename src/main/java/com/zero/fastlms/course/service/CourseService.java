@@ -25,4 +25,6 @@ public interface CourseService {
     CourseDto frontDetail(long id);
 
     ServiceResult req(TakeCourseInput parameter);
+
+    List<CourseDto> listAll();
 }

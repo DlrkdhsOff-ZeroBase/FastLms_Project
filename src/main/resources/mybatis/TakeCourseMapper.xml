@@ -6,7 +6,14 @@
 <mapper namespace="com.zero.fastlms.course.mapper.TakeCourseMapper">
 
     <select id="selectListCount" resultType="long">
-        select count(*) from take_course
+        select count(*) from take_course tc
+            join course c on tc.course_id = c.id
+            join member m on tc.user_id = m.user_id
+        <where>
+            <if test="searchCourseId > 0">
+                AND c.id = #{searchCourseId}
+            </if>
+        </where>
     </select>
 
     <select id="selectList" resultType="com.zero.fastlms.course.dto.TakeCourseDto">
@@ -17,6 +24,11 @@
         from take_course tc
             join course c on tc.course_id = c.id
             join member m on tc.user_id = m.user_id
+        <where>
+            <if test="searchCourseId > 0">
+                AND c.id = #{searchCourseId}
+            </if>
+        </where>
         order by reg_dt desc
         limit #{pageStart}, #{pageEnd}
     </select>
