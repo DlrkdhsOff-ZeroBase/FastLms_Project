@@ -32,4 +32,6 @@ public interface MemberService extends UserDetailsService {
     ServiceResult updateMember(MemberInput parameter);
 
     ServiceResult updateMemberPassword(MemberInput parameter);
+
+    ServiceResult withdraw(String userId, String password);
 }

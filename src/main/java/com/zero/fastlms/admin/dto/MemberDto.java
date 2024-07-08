@@ -44,7 +44,7 @@ public class MemberDto {
         return MemberDto.builder()
                 .userId(member.getUserId())
                 .userName(member.getUserName())
-                .password(member.getPassword())
+//                .password(member.getPassword())
                 .phone(member.getPhone())
                 .regDt(member.getRegDt())
                 .udtDt(member.getUdtDt())
