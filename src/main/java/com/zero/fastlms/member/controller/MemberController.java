@@ -1,10 +1,13 @@
 package com.zero.fastlms.member.controller;
 
 import com.zero.fastlms.admin.dto.MemberDto;
+import com.zero.fastlms.course.dto.TakeCourseDto;
 import com.zero.fastlms.course.model.ServiceResult;
+import com.zero.fastlms.course.service.TakeCourseService;
 import com.zero.fastlms.member.model.MemberInput;
 import com.zero.fastlms.member.model.ResetPasswordInput;
 import com.zero.fastlms.member.service.MemberService;
+import com.zero.fastlms.util.PasswordUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -24,6 +28,8 @@ import java.security.Principal;
 public class MemberController {
 
     private final MemberService memberService;
+
+    private final TakeCourseService takeCourseService;
 
     @GetMapping("/register")
     public String register() {
@@ -150,7 +156,33 @@ public class MemberController {
 
 
     @GetMapping("/myTakeCourse")
-    public String myTakeCourse() {
+    public String myTakeCourse(Model model, Principal principal) {
+
+        String userId = principal.getName();
+
+        List<TakeCourseDto> list = takeCourseService.myCourse(userId);
+
+        model.addAttribute("list", list);
         return "member/myTakeCourse";
+    }
+
+    @GetMapping("/withdraw")
+    public String memberWithdraw(Model model) {
+
+        return "member/withdraw";
+    }
+
+    @PostMapping("/withdraw")
+    public String memberWithdrawSubmit(Model model, Principal principal, MemberInput parameter) {
+
+        String userId = principal.getName();
+
+        ServiceResult result = memberService.withdraw(userId, parameter.getPassword());
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/logout";
     }
 }

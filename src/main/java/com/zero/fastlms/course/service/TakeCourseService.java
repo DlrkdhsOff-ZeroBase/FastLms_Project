@@ -11,4 +11,10 @@ public interface TakeCourseService {
     List<TakeCourseDto> list(TakeCourseParam parameter);
 
     ServiceResult updateStatus(long id, String status);
+
+    List<TakeCourseDto> myCourse(String userId);
+
+    TakeCourseDto detail(long id);
+
+    ServiceResult cancel(long id);
 }
