@@ -36,4 +36,6 @@ public class Course {
     LocalDate saleEndDt;
     LocalDateTime regDt;
     LocalDateTime uptDt;
+
+    String fileName;
 }
